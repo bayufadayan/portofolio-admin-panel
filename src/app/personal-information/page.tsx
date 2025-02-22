@@ -38,35 +38,35 @@ export default function PersonalInformation() {
             </div>
 
             {projectData.length > 0 ? (
-                <div className="flex flex-col-reverse md:flex-row">
+                <div className="flex flex-col md:flex-row gap-4 md:gap-0">
                     <div className='w-full md:w-1/2 flex flex-col gap-4'>
                         <div>
                             <p>Nama Lengkap</p>
-                            <h2 className="text-2xl font-bold dark:text-white">{projectData[0].name}</h2>
+                            <h2 className="text-lg md:text-2xl font-bold dark:text-white">{projectData[0].name}</h2>
                         </div>
                         <div>
                             <p>Email</p>
-                            <h2 className="text-2xl font-bold dark:text-white">
+                            <h2 className="text-lg md:text-2xl font-bold dark:text-white">
                                 {projectData[0].email}
                             </h2>
                         </div>
                         <div>
                             <p>Nomor Telepon</p>
-                            <h2 className="text-2xl font-bold dark:text-white flex gap-2 items-center">
+                            <h2 className="text-lg md:text-2xl font-bold dark:text-white flex gap-2 items-center">
                                 <span>(+62) {projectData[0].phone.replace(/^0/, '')}</span>
                                 <FiExternalLink className='text-blue-400 cursor-pointer hover:text-blue-700 rounded' />
                             </h2>
                         </div>
                         <div>
                             <p>Profile Image (URL)</p>
-                            <h2 className="text-2xl font-bold dark:text-white break-words pe-8">{projectData[0].profile_image}</h2>
-                            <div className="mt-4 w-[400px] h-[200px] border-2 border-gray-300 dark:border-gray-600 rounded-xl shadow-md overflow-hidden">
+                            <h2 className="text-lg md:text-2xl font-bold dark:text-white break-words pe-8">{projectData[0].profile_image}</h2>
+                            <div className="mt-4 w-[400px] h-[200px] hidden md:block border-2 border-gray-300 dark:border-gray-600 rounded-xl shadow-md overflow-hidden">
                                 <Image
                                     src={projectData[0].profile_image}
                                     width={250}
                                     height={250}
                                     alt="Picture of the author"
-                                    className="object-cover w-full h-full rounded-lg"
+                                    className="object-cover w-full h-full rounded-lg "
                                 />
                             </div>
 
