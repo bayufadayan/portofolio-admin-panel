@@ -1,15 +1,32 @@
 'use client'
+import axios from 'axios';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IoBriefcaseOutline, IoShareSocialOutline } from 'react-icons/io5';
 import { MdOutlineAccountCircle, MdOutlineAssignment, MdOutlineBuild, MdOutlineCardMembership, MdOutlineDirectionsRun, MdOutlineSchool, MdOutlineTimeline } from 'react-icons/md';
 
 export default function SideBar() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [projectCount, setProjectCount] = useState("");
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
     };
+
+    const fetchProjectCount = async () => {
+        try {
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/projects`);
+            const project = res.data;
+
+            setProjectCount(project.length);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchProjectCount();
+    }, []);
 
     return (
         <div>
@@ -95,50 +112,50 @@ export default function SideBar() {
                         </li>
                         <li>
                             <Link href="/social-media" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <IoShareSocialOutline className="-ml-0.5 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                                <IoShareSocialOutline className="-ml-0.5 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                                 <span className="flex-1 ms-3 whitespace-nowrap">Social Media</span>
                             </Link>
                         </li>
                         <li>
                             <Link href="/job-title" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <IoBriefcaseOutline className="-ml-0.5 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                                <IoBriefcaseOutline className="-ml-0.5 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                                 <span className="flex-1 ms-3 whitespace-nowrap">Job Title</span>
                             </Link>
                         </li>
                         <li>
                             <Link href="/project" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <MdOutlineAssignment className="-ml-0.5 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                                <MdOutlineAssignment className="-ml-0.5 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                                 <span className="flex-1 ms-3 whitespace-nowrap">Projects</span>
-                                <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
+                                <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{projectCount}</span>
                             </Link>
                         </li>
                         <li>
                             <Link href="/certificate" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <MdOutlineCardMembership className="-ml-0.5 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                                <MdOutlineCardMembership className="-ml-0.5 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                                 <span className="flex-1 ms-3 whitespace-nowrap">Certificate</span>
                             </Link>
                         </li>
                         <li>
                             <Link href="/skill" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <MdOutlineBuild className="-ml-0.5 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                                <MdOutlineBuild className="-ml-0.5 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                                 <span className="flex-1 ms-3 whitespace-nowrap">Skill</span>
                             </Link>
                         </li>
                         <li>
                             <Link href="/experience" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <MdOutlineTimeline className="-ml-0.5 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                                <MdOutlineTimeline className="-ml-0.5 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                                 <span className="flex-1 ms-3 whitespace-nowrap">Experience</span>
                             </Link>
                         </li>
                         <li>
                             <Link href="/activity" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <MdOutlineDirectionsRun className="-ml-0.5 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                                <MdOutlineDirectionsRun className="-ml-0.5 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                                 <span className="flex-1 ms-3 whitespace-nowrap">Activity</span>
                             </Link>
                         </li>
                         <li>
                             <Link href="/education" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <MdOutlineSchool className="-ml-0.5 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                                <MdOutlineSchool className="-ml-0.5 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                                 <span className="flex-1 ms-3 whitespace-nowrap">Education</span>
                             </Link>
                         </li>
